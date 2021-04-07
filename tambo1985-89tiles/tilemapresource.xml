@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <TileMap version="1.0.0" tilemapservice="http://tms.osgeo.org/1.0.0">
+      <Title>tambo_8589_leafletproj_NAs.tif</Title>
+      <Abstract></Abstract>
+      <SRS>EPSG:3857</SRS>
+      <BoundingBox minx="122.93318899035873" miny="24.04536656160277" maxx="153.98709954272394" maxy="45.52302533804085"/>
+      <Origin x="122.93318899035873" y="24.04536656160277"/>
+      <TileFormat width="256" height="256" mime-type="image/png" extension="png"/>
+      <TileSets profile="mercator">
+        <TileSet href="13" units-per-pixel="19.10925706787109" order="13"/>
+      </TileSets>
+    </TileMap>
+    
