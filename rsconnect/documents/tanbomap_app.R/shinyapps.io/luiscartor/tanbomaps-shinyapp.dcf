@@ -1,0 +1,12 @@
+name: tanbomaps-shinyapp
+title: tanbomaps-shinyapp
+username:
+account: luiscartor
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3922098
+bundleId: 4441091
+url: https://luiscartor.shinyapps.io/tanbomaps-shinyapp/
+when: 1617786204.10567
+asMultiple: FALSE
+asStatic: FALSE
