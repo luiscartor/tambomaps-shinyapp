@@ -21,7 +21,6 @@ if(!require(mapview)) install.packages("mapview", repos = "http://cran.us.r-proj
 if(!require(leafpop)) install.packages("leafpop", repos = "http://cran.us.r-project.org")
 if(!require(lattice)) install.packages("lattice", repos = "http://cran.us.r-project.org")
 if(!require(stringr)) install.packages("stringr", repos = "http://cran.us.r-project.org")
-
 ##############################################################################################################
 # 1. DATA INPUTS
 options(max.print=100000)
