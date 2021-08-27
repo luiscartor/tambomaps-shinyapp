@@ -66,9 +66,9 @@ periods <- c("1985-89","1990-94","1995-99","2000-04","2005-09","2010-14","2015-1
 # Colour pallets
 # Create Diverging palette for percentage change in prefectures
 # vector of colors for values smaller than 0 (80 colors)
-rc1 <- colorRampPalette(colors = c("red", "white"), space = "Lab")(80)
+rc1 <- colorRampPalette(colors = c("red", "white"), space = "Lab")(60)
 ## vector of colors for values larger than 0 (20 colors)
-rc2 <- colorRampPalette(colors = c("white", "blue"), space = "Lab")(30)
+rc2 <- colorRampPalette(colors = c("white", "blue"), space = "Lab")(10)
 ## Combine the two color palettes
 prefdivcols <- c(rc1, rc2)
 
@@ -92,9 +92,9 @@ basemap <- leaflet() %>% setView(lng = 138, lat = 38, zoom = 6) %>%
 
           # Adds carto DB maps (labels separated so that the are not overlapped by rasters/shapefiles)
           addProviderTiles("CartoDB.PositronNoLabels") %>%
-          addProviderTiles("CartoDB.PositronOnlyLabels", 
-                     options = leafletOptions(pane = "cartolabels"),
-                     group = "cartolabels") %>%
+          #addProviderTiles("CartoDB.PositronOnlyLabels", 
+           #          options = leafletOptions(pane = "cartolabels"),
+            #         group = "cartolabels") %>%
           
           # Adds Ersri World Imagery map
           addProviderTiles(provider = "Esri.WorldImagery", group = "Esri World Imagery", #) %>%
@@ -149,7 +149,7 @@ ui <- bootstrapPage(
                                         checkboxInput("legend", "Show legend", TRUE),
                                         tags$br(),
                                         "Total Change represents lost rice fields, estimated from the difference
-                                        between the period 1985-89 and 2014-19."
+                                        between the period 1985-89 and 2015-19."
                           )
                       )
              ),
@@ -191,9 +191,10 @@ ui <- bootstrapPage(
                         "The rice raster layers were created by classfying landsat images, combining image temporal aggregation and phenology
                         of rice fields in Google Earth Engine. Each layer represents an averaged representation of the distribution of rice fields over a period of 5 years.
                         Methods for creating the rice layers are fully described here:", tags$br(),
-                        "Paper here.", tags$br(),
+                        "Carrasco et al. 2022. Historical mapping of rice fields in Japan using phenology andtemporally aggregated Landsat images in Google Earth Engine. Under review.", tags$br(),
                         "Original rice layers have a spatial resolution of 30m. In this app, rice layers are rendered using leaflet tiles and
-                        the resolution depends on the zoom level. Original rasters can be downloaded here.",
+                        the resolution depends on the zoom level. Original rasters can be downloaded here:",tags$br(),
+                        "Extra post-processing was conducted for the presented rices layers: water bodies masking, and masking out rice pixels for Hokkaido cities were rice was never recorded in the last decades.",
                         
                         tags$br(), tags$br(),tags$h4("Rice paddy area aggregations"),
                         "Polygon layers represent aggregated rice area based on the raster layers, at the prefecture and sub-prefectural levels.",
@@ -292,7 +293,7 @@ server <- function(input, output, session) {
       
       # Pallets for area change
       #pal <- colorBin("viridis", prefsshapefile@data$area198589, bins=round(seq(0,max(subprefsarearange),length.out=10),1), na.color = "#bdbdbd")
-      pal <- colorNumeric(palette = prefdivcols, domain = c(-80,30), na.color = "transparent")
+      pal <- colorNumeric(palette = prefdivcols, domain = c(-60,10), na.color = "transparent")
       # Popup for change
       popup <- paste0("<strong>Prefecture: </strong>", 
                       prefsshapefile@data$NAME_1,
@@ -405,9 +406,9 @@ server <- function(input, output, session) {
     proxy %>% clearControls()
     if (input$legend & renderlayer() == "Rice paddy area (Prefecture-level)") {
       if(input$periods == "Total Change"){
-        pal <- colorNumeric(palette = prefdivcols, domain = c(-80,30), na.color = "transparent")
+        pal <- colorNumeric(palette = prefdivcols, domain = c(-60,10), na.color = "transparent")
         proxy %>% addLegend(position = "bottomright", title = "Rice paddy </br>area change (%)",
-                            pal = pal, values = ~c(-80,30))
+                            pal = pal, values = ~c(-60,10))
         
       } else{
         #pal <- colorNumeric( palette="viridis", domain=prefsshapefile@data[,areacolumns], na.color="transparent")
